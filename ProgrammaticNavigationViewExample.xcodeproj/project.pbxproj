@@ -11,7 +11,6 @@
 		BFB615B226AAE3EF00AE3B02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB615B126AAE3EF00AE3B02 /* ContentView.swift */; };
 		BFB615B426AAE3F000AE3B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB615B326AAE3F000AE3B02 /* Assets.xcassets */; };
 		BFB615B726AAE3F000AE3B02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB615B626AAE3F000AE3B02 /* Preview Assets.xcassets */; };
-		BFB615C426AAEB5100AE3B02 /* SwiftUIBindingTransformations in Frameworks */ = {isa = PBXBuildFile; productRef = BFB615C326AAEB5100AE3B02 /* SwiftUIBindingTransformations */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFB615C426AAEB5100AE3B02 /* SwiftUIBindingTransformations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +84,6 @@
 			);
 			name = ProgrammaticNavigationViewExample;
 			packageProductDependencies = (
-				BFB615C326AAEB5100AE3B02 /* SwiftUIBindingTransformations */,
 			);
 			productName = ProgramaticNavigationViewExample;
 			productReference = BFB615AC26AAE3EF00AE3B02 /* ProgrammaticNavigationViewExample.app */;
@@ -117,7 +114,6 @@
 			);
 			mainGroup = BFB615A326AAE3EF00AE3B02;
 			packageReferences = (
-				BFB615C226AAEB5100AE3B02 /* XCRemoteSwiftPackageReference "SwiftUIBindingTransformations" */,
 			);
 			productRefGroup = BFB615AD26AAE3EF00AE3B02 /* Products */;
 			projectDirPath = "";
@@ -349,25 +345,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		BFB615C226AAEB5100AE3B02 /* XCRemoteSwiftPackageReference "SwiftUIBindingTransformations" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ralfebert/SwiftUIBindingTransformations";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		BFB615C326AAEB5100AE3B02 /* SwiftUIBindingTransformations */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BFB615C226AAEB5100AE3B02 /* XCRemoteSwiftPackageReference "SwiftUIBindingTransformations" */;
-			productName = SwiftUIBindingTransformations;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFB615A426AAE3EF00AE3B02 /* Project object */;
 }

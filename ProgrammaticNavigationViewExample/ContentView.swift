@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUIBindingTransformations
 
 enum NavColor: String, CaseIterable, Identifiable {
     var id: String { rawValue }
@@ -70,11 +69,31 @@ struct SpecialView: View {
             Text("Todays special is: ...")
 
             Button("Go back") {
-                self.navModel.color = nil
+                // This is more tricky because setting the value clears the isActive value of the active NavigationLink
+                // and we need to be careful to detect this case. Works but quite tricky in the details / not sure if
+                // this is a good general approach.
+                self.navModel.color = .blue
             }
         }
     }
 }
+
+/// Returns a Binding that is true if the value of `binding` equals `value`. If the value of the resulting binding is set, the original binding is set to value if true and to inEqualValue to false if the value of the original binding still matches the value.
+public func isEqual<T: Equatable>(_ binding: Binding<T>, _ value: T, inEqualValue: T) -> Binding<Bool> {
+    Binding(
+        get: { binding.wrappedValue == value },
+        set: { newValue in
+            if newValue == true {
+                binding.wrappedValue = value
+            } else {
+                if binding.wrappedValue == value {
+                    binding.wrappedValue = inEqualValue
+                }
+            }
+        }
+    )
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
