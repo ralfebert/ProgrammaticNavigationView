@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftUIBindingTransformations",
+        "repositoryURL": "https://github.com/ralfebert/SwiftUIBindingTransformations",
+        "state": {
+          "branch": "main",
+          "revision": "380abe9a512b593e5c43dde896809e26f76f9e4e",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
