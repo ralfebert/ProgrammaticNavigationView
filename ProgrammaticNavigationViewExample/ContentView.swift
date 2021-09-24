@@ -1,14 +1,24 @@
 import SwiftUI
-import SwiftUIBindingTransformations
 
-enum NavColor: String, CaseIterable, Identifiable {
-    var id: String { rawValue }
-
-    case red, green, blue
+enum CardSuit: String, CaseIterable {
+    case diamonds
+    case clubs
+    case hearts
+    case spades
 }
 
 class NavModel: ObservableObject {
-    @Published var color: NavColor?
+    @Published var activeSuit: CardSuit? {
+        didSet {
+            print("activeSuit: ", String(describing: self.activeSuit))
+        }
+    }
+
+    @Published var showDetails = false {
+        didSet {
+            print("showDetails: ", self.showDetails)
+        }
+    }
 }
 
 struct ContentView: View {
@@ -16,61 +26,57 @@ struct ContentView: View {
 
     var body: some View {
         List {
-            ForEach(NavColor.allCases) { navColor in
+            ForEach(CardSuit.allCases, id: \.self) { suit in
                 NavigationLink(
-                    isActive: isEqual(self.$navModel.color, navColor, inEqualValue: nil),
+                    tag: suit,
+                    selection: $navModel.activeSuit,
                     destination: {
-                        ColorView(navColor: navColor)
+                        SuitView(suit: suit)
                     },
                     label: {
-                        Text(navColor.rawValue)
+                        Text(suit.rawValue)
                     }
                 )
             }
-
-            Button("Random color") {
-                self.navModel.color = NavColor.allCases.randomElement()!
-            }
         }
-        .navigationTitle("Example")
+        .navigationTitle("Card suits")
     }
 }
 
-struct ColorView: View {
-    @State var special = false
-    let navColor: NavColor
-
-    var body: some View {
-        ZStack {
-            self.backgroundView
-                .ignoresSafeArea()
-            NavigationLink("Show special") {
-                SpecialView()
-            }
-        }
-    }
-
-    @ViewBuilder var backgroundView: some View {
-        switch self.navColor {
-        case .red:
-            Color.red
-        case .green:
-            Color.green
-        case .blue:
-            Color(red: 0, green: 0, blue: 0.5)
-        }
-    }
-}
-
-struct SpecialView: View {
+struct SuitView: View {
     @EnvironmentObject var navModel: NavModel
+    let suit: CardSuit
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("Todays special is: ...")
+            Text(suit.rawValue)
 
-            Button("Go back") {
-                self.navModel.color = nil
+            NavigationLink(
+                isActive: $navModel.showDetails,
+                destination: {
+                    DetailsView(suit: suit)
+                },
+                label: {
+                    Text("Show more details")
+                }
+            )
+        }
+    }
+}
+
+struct DetailsView: View {
+    @EnvironmentObject var navModel: NavModel
+    let suit: CardSuit
+
+    var body: some View {
+        VStack(spacing: 10) {
+            Text("More details about \(suit.rawValue)")
+
+            Button("Go back to suit") {
+                self.navModel.showDetails = false
+            }
+            Button("Go back to suit menu") {
+                self.navModel.activeSuit = nil
             }
         }
     }

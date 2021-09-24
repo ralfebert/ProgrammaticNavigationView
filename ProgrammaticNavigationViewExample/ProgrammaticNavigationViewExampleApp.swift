@@ -9,6 +9,7 @@ struct ProgrammaticNavigationViewExampleApp: App {
             NavigationView {
                 ContentView()
             }
+            .navigationViewStyle(.stack)
             .environmentObject(self.navModel)
         }
     }
